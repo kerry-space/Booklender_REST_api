@@ -21,6 +21,7 @@ public class Loan {
     @ManyToOne()
     private LibraryUser loanTaker;
 
+    @ManyToOne()
    private Book book;
 
    private LocalDate loanDate;
