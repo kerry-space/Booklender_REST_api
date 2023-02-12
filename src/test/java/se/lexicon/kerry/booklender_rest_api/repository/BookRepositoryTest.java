@@ -13,19 +13,27 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class BookRepositoryTest {
 
     @Autowired
-    BookRepository bookRepository;
+    BookRepository testObject;
 
-    Book testBook;
+    Book createdBook;
 
     @BeforeEach
     void setUp() {
-        testBook = new Book("Test Book", 14, BigDecimal.valueOf(2.5), "This is a test book description.");
-        bookRepository.save(testBook);
+       Book testBook = new Book("Test Book", 14, BigDecimal.valueOf(2.5), "This is a test book description.");
+       createdBook = testObject.save(testBook);
+        assertNotNull(createdBook);
+    }
+
+    //CRUD TEST
+
+    @Test
+    public void test_create_Book(){
+
     }
 
     @Test
     void given_book_exists_when_findByTitleContains_then_return_book() {
-        List<Book> books = bookRepository.findAllByTitleContains("Test");
+        List<Book> books = testObject.findAllByTitleContains("Test");
         assertNotNull(books);
         assertEquals(1, books.size());
         assertEquals("Test Book", books.get(0).getTitle());
@@ -33,9 +41,10 @@ public class BookRepositoryTest {
 
     @Test
     void given_book_exists_when_findByAvailableStatus_then_return_book() {
-        List<Book> books = bookRepository.findByAvailableStatus(true);
+        List<Book> books = testObject.findByAvailableStatus(true);
         assertNotNull(books);
         assertEquals(1, books.size());
         assertEquals("Test Book", books.get(0).getTitle());
     }
+
 }
