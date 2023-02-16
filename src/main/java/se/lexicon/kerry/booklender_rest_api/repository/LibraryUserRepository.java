@@ -13,7 +13,6 @@ import java.util.Optional;
 @Repository
 public interface LibraryUserRepository extends CrudRepository<LibraryUser, Integer> {
 
-
     Optional<LibraryUser> findById(Integer userId);
 
     List<LibraryUser> findAllByOrderByUserIdDesc();

@@ -12,6 +12,6 @@ public interface BookService {
     BookDto findById(Integer bookId);
     List<BookDto> findAll();
     BookDto create(BookDto BookDto);
-    void update(BookDto BookDto);
-    void delete(Integer bookId);
+    BookDto update(BookDto BookDto);
+    Boolean delete(Integer bookId);
 }

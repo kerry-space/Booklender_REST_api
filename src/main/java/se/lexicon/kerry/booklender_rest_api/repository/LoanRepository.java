@@ -16,7 +16,7 @@ public interface LoanRepository extends CrudRepository<Loan, Long> {
     Optional<Loan> findById(Long loanId);
 
     @Query("select l from Loan l where l.book.bookId = :bookId")
-    Optional<Loan> findByBookId(@Param("bookId") int bookId);
+    List<Loan> findByBookId(@Param("bookId") int bookId);
 
 
     @Query("select l from Loan l where l.concluded = :concluded")

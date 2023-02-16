@@ -10,6 +10,6 @@ public interface LoanService {
     List<LoanDto> findByConcluded(boolean loanId);
     List<LoanDto> findAll();
     LoanDto create(LoanDto LoanDto);
-    void update(LoanDto LoanDto);
-    void delete(boolean loanId);
+    LoanDto update(LoanDto LoanDto);
+    Boolean delete(long loanId);
 }

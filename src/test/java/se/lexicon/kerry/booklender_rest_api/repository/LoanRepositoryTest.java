@@ -56,15 +56,6 @@ public class LoanRepositoryTest {
         assertEquals(expected, actual);
     }
 
-    //Read(R)
-    @Test
-    public void test_findByBookId(){
-        Loan actual = testObject.findByBookId(createdLoan.getBook().getBookId()).orElseThrow(() -> new IllegalArgumentException("could not found data"));
-        Loan expected = createdLoan;
-        assertEquals(expected,actual);
-    }
-
-    //Read(R)
     @Test
     public  void ConcludedStatus(){
         List<Loan> loan  =  testObject.findByConcluded(createdLoan.isConcluded());

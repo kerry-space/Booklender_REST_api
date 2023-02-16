@@ -10,6 +10,6 @@ public interface LibraryUserService {
     LibraryUserDto findByEmailId(String email);
     List<LibraryUserDto> findAll();
     LibraryUserDto create(LibraryUserDto LibraryUserDto);
-    void update(LibraryUserDto LibraryUserDto);
-    void delete(boolean userId);
+    LibraryUserDto update(LibraryUserDto LibraryUserDto);
+    Boolean delete(Integer userId);
 }

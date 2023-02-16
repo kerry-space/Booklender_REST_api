@@ -14,10 +14,10 @@ import java.util.stream.Collectors;
 public class BookServiceImpl implements BookService {
 
     @Autowired
-     BookRepository bookRepository;
+    BookRepository bookRepository;
 
     @Autowired
-      ModelMapper modelMapper;
+    ModelMapper modelMapper;
 
     public List<BookDto> findByReserved(boolean reserved) {
         List<Book> books = bookRepository.findByReservedStatus(reserved);
@@ -65,31 +65,27 @@ public class BookServiceImpl implements BookService {
         return modelMapper.map(book, BookDto.class);
     }
 
-    public void update(BookDto bookDto) {
-        if (bookDto == null) {
-            throw new IllegalArgumentException("Book data was null");
-        }
-        if (bookDto.getBookId() == 0) {
-            throw new IllegalArgumentException("Book id should not be zero");
-        }
+    public BookDto update(BookDto bookDto) {
+        if (bookDto == null) throw new IllegalArgumentException("Book data was null");
+
+        if (bookDto.getBookId() == 0) throw new IllegalArgumentException("Book id should not be zero");
+
 
         Optional<Book> optionalBook = bookRepository.findById(bookDto.getBookId());
-        if (!optionalBook.isPresent()) {
-            throw new DataNotFoundException("Book not found");
-        }
+        if (!optionalBook.isPresent()) throw new DataNotFoundException("Book not found");
+        Book entity = optionalBook.get();
 
-        Book book = optionalBook.get();
-        modelMapper.map(bookDto, book); // updates the fields of the book entity
-        bookRepository.save(book); // saves the updated book entity to the database
+        Book createdBook = bookRepository.save(entity); // saves the updated book entity to the database
+        return modelMapper.map(createdBook, BookDto.class); // updates the fields of the book entity
     }
 
     @Override
-    public void delete(Integer bookId) {
-        BookDto roleDto = findById(bookId);
-        if (roleDto == null) throw new DataNotFoundException("id was not valid");
-        bookRepository.deleteById(bookId);
+    public Boolean delete(Integer bookId) {
+        Book entity = bookRepository.findById(bookId).orElseThrow(() -> new DataNotFoundException("Book  data WAS NOT FOUND"));
+        bookRepository.delete(entity);
+        return true;
     }
 
-    }
+}
 
 
