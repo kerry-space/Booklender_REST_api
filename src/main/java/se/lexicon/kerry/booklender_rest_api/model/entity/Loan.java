@@ -18,12 +18,14 @@ public class Loan {
     private long loanId;
 
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
     private LibraryUser loanTaker;
 
-   private Book book;
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    private Book book;
 
-   private LocalDate loanDate;
+
+    private LocalDate loanDate;
 
    private boolean concluded;
 
