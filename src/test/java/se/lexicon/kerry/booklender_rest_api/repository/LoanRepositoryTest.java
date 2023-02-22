@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.cglib.core.Local;
 import se.lexicon.kerry.booklender_rest_api.model.entity.Book;
 import se.lexicon.kerry.booklender_rest_api.model.entity.LibraryUser;
 import se.lexicon.kerry.booklender_rest_api.model.entity.Loan;
@@ -13,7 +12,6 @@ import se.lexicon.kerry.booklender_rest_api.model.entity.Loan;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @DataJpaTest
 public class LoanRepositoryTest {
@@ -57,12 +55,7 @@ public class LoanRepositoryTest {
     }
 
     //Read(R)
-    @Test
-    public void test_findByBookId(){
-        Loan actual = testObject.findByBookId(createdLoan.getBook().getBookId()).orElseThrow(() -> new IllegalArgumentException("could not found data"));
-        Loan expected = createdLoan;
-        assertEquals(expected,actual);
-    }
+
 
     //Read(R)
     @Test

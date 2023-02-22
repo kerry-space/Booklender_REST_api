@@ -13,18 +13,22 @@ import java.util.Optional;
 public interface LoanRepository extends CrudRepository<Loan, Long> {
 
 
-    Optional<Loan> findById(Long loanId);
+
+    @Query("select l from Loan l where l.loanTaker.userId = :userId")
+    List<Loan> findByUserId(@Param("userId") int userId);
 
 
 
 
     @Query("select l from Loan l where l.book.bookId = :bookId")
-    Optional<Loan> findByBookId(@Param("bookId") int bookId);
+    List<Loan> findByBookId(@Param("bookId") int bookId);
 
 
     @Query("select l from Loan l where l.concluded = :concluded")
    List<Loan> findByConcluded(@Param("concluded") boolean concluded);
 
+    @Query("delete from Loan l where l.loanId = :loanId")
+    boolean deleteByById(@Param("loanId") Long loanId);
 
 
 
